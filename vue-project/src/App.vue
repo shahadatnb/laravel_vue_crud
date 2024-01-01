@@ -1,5 +1,5 @@
 <script setup>
-
+import {authStore} from './store/authStore';
 </script>
 
 <template>
@@ -17,8 +17,9 @@
                 </ul>
             </div>
             <div class="flex items-center">
-                <router-link to="/login" class="bg-[#2563eb] text-white px-5 py-2 mr-5 rounded-full hover:bg-[#87acec]">Login</router-link>
-                <router-link to="/register" class="bg-[#2563eb] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Register</router-link>
+                <router-link v-if="!authStore.isAuthenticated" to="/login" class="bg-[#2563eb] text-white px-5 py-2 mr-5 rounded-full hover:bg-[#87acec]">Login</router-link>
+                <router-link v-if="!authStore.isAuthenticated" to="/register" class="bg-[#2563eb] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Register</router-link>
+                <button v-if="authStore.isAuthenticated" @click="authStore.logout()" class="bg-[#2563eb] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Logout</button>
             </div>
         </nav>
     </header>
