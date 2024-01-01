@@ -50,9 +50,7 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 //........\app\Http\Controllers\Auth\RegisteredUserController.php
-    public function registerApi(RegisterRequest $request){
-        $validated = $request->validated();
-        
+    public function registerApi(RegisterRequest $request){       
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

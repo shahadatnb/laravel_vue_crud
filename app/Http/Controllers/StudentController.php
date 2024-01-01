@@ -1,33 +1,47 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Student;
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
     public function index()
     {
-        //
+        $students = Student::all();
+        return response(['students' => $students],  200);
     }
 
-    public function store(StoreStudentRequest $request)
+    public function store(Request $request)
     {
-        //
+        $student = new Student;
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->roll = $request->roll;
+        $student->phone = $request->phone;
+        $student->address = $request->address;
+        $student->save();
+        return response(['student' => $student],  200);
     }
 
     public function show(Student $student)
     {
-        //
+        return response(['student' => $student],  200);
     }
 
-    public function update(UpdateStudentRequest $request, Student $student)
+    public function update(Request $request, Student $student)
     {
-        //
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->roll = $request->roll;
+        $student->phone = $request->phone;
+        $student->address = $request->address;
+        $student->save();
+        return response(['student' => $student],  200);
     }
 
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return response(['student' => $student],  200);
     }
 }
