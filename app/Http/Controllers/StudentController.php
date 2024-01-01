@@ -8,7 +8,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return response(['students' => $students],  200);
+        return response()->json(['students' => $students],  200);
     }
 
     public function store(Request $request)
@@ -20,7 +20,7 @@ class StudentController extends Controller
         $student->phone = $request->phone;
         $student->address = $request->address;
         $student->save();
-        return response(['student' => $student],  200);
+        return response()->json(['student' => $student],  200);
     }
 
     public function show(Student $student)
@@ -36,12 +36,12 @@ class StudentController extends Controller
         $student->phone = $request->phone;
         $student->address = $request->address;
         $student->save();
-        return response(['student' => $student],  200);
+        return response()->json(['student' => $student],  200);
     }
 
     public function destroy(Student $student)
     {
         $student->delete();
-        return response(['student' => $student],  200);
+        return response()->json(['success' => true],  200);
     }
 }

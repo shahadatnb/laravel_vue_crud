@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import {authStore} from '../store/authStore';
 import Login from '../components/Login.vue';
 import Register from '../components/Register.vue';
 import Home from '../components/Home.vue';
 import Dashboard from '../components/Dashboard.vue';
 import StudentAdd from '../components/StudentAdd.vue';
+import StudentEdit from '../components/StudentEdit.vue';
 
 const routes = [
     {
@@ -20,7 +22,7 @@ const routes = [
         }
     },
     {
-        path: '/student/edit/:id', component: StudentAdd, 'name': 'student-edit',meta: {
+        path: '/student/edit/:id', component: StudentEdit, 'name': 'student-edit',meta: {
             requiresAuth: true
         }
     },
@@ -39,7 +41,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && !autoStore.isAuthenticated) {
+    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
         next({ name: 'login' })
     } else {
         next()
